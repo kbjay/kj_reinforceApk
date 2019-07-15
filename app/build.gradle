@@ -1,0 +1,56 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.reinforce.kj'
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.example.kb_jay.kj_reinforcegradleplugin"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation project(':shell')
+}
+
+
+reinforce {
+    sourceApk = file(getBuildDir().getAbsolutePath() + "/outputs/apk/debug/app-debug.apk")
+    /**
+     * 壳aar
+     */
+    shellAar = file(getRootProject().getSubprojects().find {
+        it.name == "shell"
+    }.getBuildDir().getAbsolutePath() + "/outputs/aar/shell-debug.aar")
+    /**
+     * 加密类型
+     */
+    encriptionType = 1
+    /**
+     * 签名文件
+     */
+    signKeyStore = "/Users/kb_jay/Documents/kbjay.keystore"
+
+    signAlias = "kbjay"
+
+    sdkPath = "/Users/kb_jay/Library/Android/sdk/build-tools/28.0.3"
+
+    secretKey = "1234"
+
+    jdkPath = "/private/var/folders/c6/m_jcqqv17s5_50fj49sdq4q80000gn/T/AppTranslocation/5C6025AF-5527-48D6-BADE-8E26A490D3AD/d/Android Studio.app/Contents/jre/jdk/Contents/Home"
+}
