@@ -114,8 +114,8 @@ void decryptDexInDir(JNIEnv *env, char *dir) {
             std::string name_(std::string(dir) + "/_" + s);
 
 
-            jmethodID pJmethodID = env->GetMethodID(pJclass, "decrypt", "(Ljava/lang/String;Ljava/lang/String;)V");
-            env->CallVoidMethod(pJobject,pJmethodID,env->NewStringUTF(name.data()),env->NewStringUTF(name_.data()));
+//            jmethodID pJmethodID = env->GetMethodID(pJclass, "decrypt", "(Ljava/lang/String;Ljava/lang/String;)V");
+//            env->CallVoidMethod(pJobject,pJmethodID,env->NewStringUTF(name.data()),env->NewStringUTF(name_.data()));
 
             //            jmethodID pJmethodID = env->GetMethodID(pJclass, "decrypt", "([B)[B");
 //            std::ifstream is(name, std::istream::binary);
@@ -133,6 +133,7 @@ void decryptDexInDir(JNIEnv *env, char *dir) {
 //            std::ofstream os(name_, std::istream::binary);
 //            os.write(cData, env->GetArrayLength(data));
 //            os.close();
+            des_decryptFile(const_cast<char *>(name.data()), const_cast<char *>(name_.data()));
 
             remove(name.data());
             rename(name_.data(), name.data());

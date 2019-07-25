@@ -44,7 +44,7 @@ reinforce {
     /**
      * 签名文件
      */
-    signKeyStore = "/Users/kb_jay/Documents/kbjay.keystore"
+    signKeyStore = getRootProject().getRootDir().getAbsolutePath()+"/kbjay.keystore"
 
     signAlias = "kbjay"
 
