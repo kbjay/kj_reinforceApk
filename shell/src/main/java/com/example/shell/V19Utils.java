@@ -1,5 +1,6 @@
 package com.example.shell;
 
+import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
@@ -13,14 +14,40 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
 
 public class V19Utils {
 
-    public static final String TAG = V19Utils.class.getSimpleName();
+    public static final String TAG = "reinforce";
 
-    public static void install(ClassLoader loader, List<File> additionalClassPathEntries,
-                               File optimizedDirectory)
+    public static void installDir(Context context, String dir) {
+        Log.d(TAG, dir);
+        File dirFile = new File(dir);
+        List<File> dexFiles = new ArrayList<>();
+        for (File file : dirFile.listFiles()) {
+            if (file.getName().endsWith(".dex")) {
+                Log.d(TAG, file.getName());
+                dexFiles.add(file);
+            }
+        }
+        try {
+            install(KJSProxyApplication.mInstance.getClassLoader(), dexFiles, dirFile);
+        } catch (IllegalAccessException e) {
+            Log.d(TAG, "加载dex失败" + e.getMessage());
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            Log.d(TAG, "加载dex失败" + e.getMessage());
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            Log.d(TAG, "加载dex失败" + e.getMessage());
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            Log.d(TAG, "加载dex失败" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private static void install(ClassLoader loader, List<File> additionalClassPathEntries,
+                                File optimizedDirectory)
             throws IllegalArgumentException, IllegalAccessException,
             NoSuchFieldException, InvocationTargetException, NoSuchMethodException {
         /* The patched class loader is expected to be a descendant of
