@@ -124,18 +124,10 @@ class TaskReinforce extends DefaultTask {
         println "[+] 合并结束"
         //4：重新打包
         println "[+] 开始打包apk（没有签名）"
-//        def packageApkCommand = "${input.jdkPath} b -o ${reinforceDir.getAbsolutePath()}/no-sign.apk ${sourceUnZipDir.getAbsolutePath()}"
-//        println packageApkCommand
-//        def packageApkOut = new StringBuilder()
-//        def packageApkError = new StringBuilder()
-//        def packageApkExecute = packageApkCommand.execute()
-//        packageApkExecute.wait()
-//        packageApkExecute.consumeProcessOutput(packageApkOut, packageApkError)
+
         ZipUtils.zip(sourceUnZipDir.getAbsolutePath(), new File(reinforceDir, "no-sign.apk").getAbsolutePath())
         println "[+] 打包apk完成（没有签名）"
         println "[+] 开始签名apk"
-//        jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore 签名文件名 -storepass 签名密码 待签名的APK文件名 签名的别名
-//         jarsigner -verbose -keystore mykeystore -signedjar android_signed.apk(目标名字) TestSMSDemo.apk(要签名的apk) linlin
 //       apksigner sign --ks /Users/kb_jay/Documents/kbjay.keystore --ks-key-alias kbjay --ks-pass pass:123456 --out /Users/kb_jay/Documents/myGit/apk_auto_enforce-master/KJ_ReinforceGradlePlugin/app/build/reinforce/sign.apk /Users/kb_jay/Documents/myGit/apk_auto_enforce-master/KJ_ReinforceGradlePlugin/app/build/reinforce/no-sign.apk
         def signerCommand = ["${input.sdkPath}/apksigner",
                              "sign",

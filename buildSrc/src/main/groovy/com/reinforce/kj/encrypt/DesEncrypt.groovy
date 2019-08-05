@@ -9,8 +9,7 @@ import java.security.Key
  * des加密
  *
  * 解密用来测试
- * @anthor kb_jay
- * create at 2019/7/10 下午8:13
+ * @anthor kb_jay* create at 2019/7/10 下午8:13
  */
 class DesEncrypt implements IEncrypt {
     private Cipher cipherEncrypt
@@ -32,7 +31,7 @@ class DesEncrypt implements IEncrypt {
         cipherDecrypt = Cipher.getInstance("DES")
         cipherDecrypt.init(Cipher.DECRYPT_MODE, key(secret))
     }
-
+//    todo io标准化
     @Override
     void encrypt(File source, File destFile) {
         InputStream is = new FileInputStream(source)
@@ -47,21 +46,48 @@ class DesEncrypt implements IEncrypt {
         cis.close()
         is.close()
         out.close()
-    }
-
-    @Override
-    void decrypt(File source, File des) {
-        OutputStream os = new FileOutputStream(des)
-        InputStream is = new FileInputStream(source)
-        CipherInputStream cis = new CipherInputStream(is, cipherDecrypt)
-
-        byte[] buffer = new byte[1024]
-        int len
-        while ((len = cis.read(buffer)) > 0) {
-            os.write(buffer, 0, len)
-        }
-        os.close()
-        cis.close()
-        is.close()
+//        try {
+//            InputStream is = new FileInputStream(source)
+//            File tempFile = new File(source.getParentFile().getAbsolutePath() + "/temp.dex")
+//            FileOutputStream tempOs = new FileOutputStream(
+//                    tempFile)
+//
+//            byte[] b = new byte[8]
+//
+//            int len = -1
+//            while ((len = is.read(b)) == 8) {
+//                tempOs.write(b, 0, len)
+//            }
+//            ///添加'\0'
+//            if (len > 0) {
+//                for (int i = len; i < 8; i++) {
+//                    b[i] = '\0'
+//                }
+//                tempOs.write(b, 0, 8)
+//            }
+//            tempOs.close()
+//
+//            FileInputStream fis = new FileInputStream(tempFile)
+//
+//            OutputStream out = new FileOutputStream(destFile)
+//
+//
+//            CipherInputStream cis = new CipherInputStream(fis, cipherEncrypt)
+//            byte[] buffer = new byte[8]
+//            int r = -1
+//            while ((r = cis.read(buffer)) > 0) {
+//                out.write(buffer, 0, r)
+//            }
+//
+//            cis.close()
+//            is.close()
+//            out.close()
+//            tempOs.close()
+//            tempFile.delete()
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace()
+//        } catch (IOException e) {
+//            e.printStackTrace()
+//        }
     }
 }

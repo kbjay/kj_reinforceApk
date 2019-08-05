@@ -125,13 +125,4 @@ public class ZipUtils {
         }
 
     }
-
-    public static void main(String[] args) throws Exception {
-        String sourceFolder = "E:\\360product\\PRODUCT_360_20140505.txt";
-        String zipFilePath = "E:\\360product\\PRODUCT_360_20140505.zip";
-        //  String destDir = "D:/";  
-        ZipUtils.zip(sourceFolder, zipFilePath);
-        //  ZipUtils.unZip(zipFilePath, destDir);  
-    }
-
 }

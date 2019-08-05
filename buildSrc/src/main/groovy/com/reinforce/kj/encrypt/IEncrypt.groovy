@@ -11,10 +11,5 @@ interface IEncrypt {
      * @param des
      */
     void encrypt(File source, File des)
-    /**
-     * 解密（测试用）
-     * @param source
-     * @param des
-     */
-    void decrypt(File source, File des)
+
 }

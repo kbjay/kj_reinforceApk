@@ -17,6 +17,7 @@ import java.io.OutputStream;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.util.BitSet;
 
 /**
  * AES 对称算法加密/解密工具类
@@ -97,6 +98,28 @@ public class DESUtils {
             e.printStackTrace();
         }
 
+    }
+
+    public void decrypt(String source, String des) {
+        OutputStream os = null;
+        try {
+            os = new FileOutputStream(des);
+            InputStream is = new FileInputStream(source);
+            CipherInputStream cis = new CipherInputStream(is, cipherDecrypt);
+
+            byte[] buffer = new byte[1024];
+            int len = -1;
+            while ((len = cis.read(buffer)) > 0) {
+                os.write(buffer, 0, len);
+            }
+            os.close();
+            cis.close();
+            is.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public byte[] decrypt(byte[] arr) {

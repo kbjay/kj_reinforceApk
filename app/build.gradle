@@ -44,13 +44,13 @@ reinforce {
     /**
      * 签名文件
      */
-    signKeyStore = "/Users/kb_jay/Documents/kbjay.keystore"
+    signKeyStore = getRootProject().getRootDir().getAbsolutePath()+"/kbjay.keystore"
 
     signAlias = "kbjay"
 
     sdkPath = "/Users/kb_jay/Library/Android/sdk/build-tools/28.0.3"
 
-    secretKey = "1234"
+    secretKey = "12345678"
 
     jdkPath = "/private/var/folders/c6/m_jcqqv17s5_50fj49sdq4q80000gn/T/AppTranslocation/5C6025AF-5527-48D6-BADE-8E26A490D3AD/d/Android Studio.app/Contents/jre/jdk/Contents/Home"
 }
